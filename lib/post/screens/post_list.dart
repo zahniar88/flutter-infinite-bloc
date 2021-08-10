@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_list/bottom_loader.dart';
 import 'package:infinite_list/post/bloc/post_bloc.dart';
+import 'package:infinite_list/post/screens/post_detail.dart';
 
 class PostList extends StatelessWidget {
   const PostList({
@@ -15,8 +16,9 @@ class PostList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount:
-          state.hasReachedMax && state is PostInitial ? state.posts.length : state.posts.length + 1,
+      itemCount: state.hasReachedMax && state is PostInitial
+          ? state.posts.length
+          : state.posts.length + 1,
       controller: scrollController,
       itemBuilder: (context, index) {
         if (index >= state.posts.length) return BottomLoader();
@@ -36,8 +38,16 @@ class PostList extends StatelessWidget {
               fontSize: 16,
             ),
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 10).copyWith(bottom: 10),
-          onTap: () {},
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 10).copyWith(bottom: 10),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => PostDetail(post: state.posts[index]),
+              ),
+            );
+          },
         );
       },
     );
