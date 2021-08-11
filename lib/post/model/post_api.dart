@@ -20,15 +20,6 @@ class PostApi {
     }
 
     final json = jsonDecode(response.body) as List;
-    return json
-        .map<Post>(
-          (post) => Post(
-            id: post["id"],
-            title: post["title"],
-            body: post["body"],
-            userId: post["userId"],
-          ),
-        )
-        .toList();
+    return json.map<Post>((post) => Post.fromJson(post)).toList();
   }
 }
