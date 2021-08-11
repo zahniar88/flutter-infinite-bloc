@@ -54,9 +54,12 @@ class _PostBodyState extends State<PostBody> {
               child: Text("No Post"),
             );
 
-          return PostList(
-            scrollController: _scrollController,
-            state: state,
+          return RefreshIndicator(
+            onRefresh: _onRefresh,
+            child: PostList(
+              scrollController: _scrollController,
+              state: state,
+            ),
           );
         }
 
@@ -70,6 +73,10 @@ class _PostBodyState extends State<PostBody> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  Future<void> _onRefresh() async {
+    _postBloc..add(PostRefresh());
   }
 
   void _onScroll() {

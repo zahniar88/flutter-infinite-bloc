@@ -14,6 +14,11 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     if (event is PostFetched) {
       yield await _mapPostToState(state);
     }
+    if (event is PostRefresh) {
+      yield PostInitial();
+
+      yield await _mapPostToState(state);
+    }
   }
 
   Future<PostState> _mapPostToState(PostState state) async {

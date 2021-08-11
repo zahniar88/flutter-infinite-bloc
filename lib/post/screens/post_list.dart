@@ -15,10 +15,9 @@ class PostList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: state.hasReachedMax
-          ? state.posts.length
-          : state.posts.length + 1,
+    return ListView.separated(
+      itemCount:
+          state.hasReachedMax ? state.posts.length : state.posts.length + 1,
       controller: scrollController,
       itemBuilder: (context, index) {
         if (index >= state.posts.length) return BottomLoader();
@@ -50,6 +49,9 @@ class PostList extends StatelessWidget {
           },
         );
       },
+      separatorBuilder: (BuildContext context, int index) => Divider(
+        thickness: 1,
+      ),
     );
   }
 }
