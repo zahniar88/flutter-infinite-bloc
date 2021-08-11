@@ -16,7 +16,7 @@ class PostList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: state.hasReachedMax && state is PostInitial
+      itemCount: state.hasReachedMax
           ? state.posts.length
           : state.posts.length + 1,
       controller: scrollController,
